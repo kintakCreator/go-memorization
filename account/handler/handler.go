@@ -5,20 +5,26 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jacobsgoodwin/memrizr/model"
 )
 
 // Handler struct holds required services for handler to function
-type Handler struct{}
+type Handler struct {
+	UserService model.UserService
+}
 
 // Config will hold services that will eventually be injected into this
 type Config struct {
-	R *gin.Engine
+	R           *gin.Engine
+	UserService model.UserService
 }
 
 // NewHandler initializes the handler with required injected services along with http routes
 // Does not return as it deals directly with a reference to the gin engine
 func NewHandler(c *Config) {
-	h := &Handler{}
+	h := &Handler{
+		UserService: c.UserService,
+	}
 
 	g := c.R.Group(os.Getenv("ACCOUNT_API_URL"))
 
@@ -30,13 +36,6 @@ func NewHandler(c *Config) {
 	g.POST("/image", h.Image)
 	g.DELETE("/image", h.DeleteImage)
 	g.PUT("/details", h.Details)
-}
-
-// Calls service for getting a User details
-func (h *Handler) Me(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"hi": "it's me!",
-	})
 }
 
 // Signup handler
