@@ -4,7 +4,8 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/jacobsgoodwin/memrizr/model"
+	"github.com/jacobsgoodwin/memrizr/account/model"
+	"github.com/jacobsgoodwin/memrizr/account/model/apperrors"
 )
 
 // UserService acts as a struct for injecting an implementation of UserRepository
@@ -31,4 +32,10 @@ func NewUserService(c *USConfig) model.UserService {
 func (s *UserService) Get(ctx context.Context, uid uuid.UUID) (*model.User, error) {
 	u, err := s.UserRepository.FindByID(ctx, uid)
 	return u, err
+}
+
+// Signup reaches our to a UserRepository to verify the email addres
+func (s *UserService) Signup(ctx context.Context, u *model.User) error {
+	//panic("Method not implemented")
+	return apperrors.NewBadRequest("aboba")
 }

@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jacobsgoodwin/memrizr/model"
-	"github.com/jacobsgoodwin/memrizr/model/apperrors"
+	"github.com/jacobsgoodwin/memrizr/account/model"
+	"github.com/jacobsgoodwin/memrizr/account/model/apperrors"
 )
 
 // Calls service for getting a User details
